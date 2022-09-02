@@ -5,13 +5,13 @@ import * as cardServices from '../services/cardServices'
 // import * as operacoesService from '../services/operacoesService';
 
 export async function createCard(req: Request, res: Response) {
-    const { employeeId, type } : {employeeId: number, type: string} = req.body;
+    const { employeeId, type } : {employeeId: number, type: cardRepository.TransactionTypes} = req.body;
     if (!employeeId || !type) {
         return res.sendStatus(422)
     }
     const card = await cardServices.createCard(employeeId, type)
     console.log(card)
-    res.status(200).send({message: `estou na rota create card ${card}`})
+    res.status(200).send({message: `estou na rota create card ${JSON.stringify(card)}`})
 
 }
 

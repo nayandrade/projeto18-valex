@@ -1,17 +1,29 @@
 import * as cardRepository from "../repositories/cardRepository";
 import * as employeeRepository from "../repositories/employeeRepository";
 import { faker } from '@faker-js/faker';
+import dayjs from "dayjs";
 
-export async function createCard(employeeId: number, type: string) {
+export async function createCard(employeeId: number, type: cardRepository.TransactionTypes) {
   const employee = await getEmployeeData(employeeId);
   //console.log(employee);
   if (employee) {
-    const cardholderName: string = handleEmployeeName(employee);
     const creditcardNumber: string = faker.finance.creditCardNumber('################')
+    const cardholderName: string = handleEmployeeName(employee);
     const securityCode: string = faker.finance.creditCardCVV()
     const expirationDate: string = handleExpirationDate()
+    const cardData = {
+        employeeId: employeeId,
+        number: creditcardNumber,
+        cardholderName: cardholderName,
+        securityCode: securityCode,
+        expirationDate: expirationDate,
+        isVirtual: false,
+        isBlocked: true,
+        type: type,
+    }
+    await cardRepository.insert(cardData)
     console.log(cardholderName, creditcardNumber, securityCode, expirationDate)
-    return employee
+    return cardData
     }
 }
 
@@ -45,10 +57,11 @@ function handleEmployeeName({ fullName }: { fullName: string }) {
 
 function handleExpirationDate() {
     const today = new Date()
-    const year = today.getFullYear();
-    const month = today.getMonth();
-    const day = today.getDate();
-    const expiration: string = new Date(year + 1, month, day).toDateString();
-    console.log(expiration, today)
-    return expiration.toString()
+    const expiration = dayjs(today).add(5, 'year').format('MM-YY').toString()
+    //const expiration: string = new Date(year + 1, month, day).toDateString();
+    // const year = today.getFullYear();
+    // const month = today.getMonth();
+    // const day = today.getDate();
+    //console.log(expiration, today)
+    return expiration
 }
