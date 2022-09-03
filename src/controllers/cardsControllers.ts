@@ -5,16 +5,11 @@ import cardActivationServices from "../services/cardActivationServices";
 
 export async function createCard(req: Request, res: Response) {
   const { apiKey } = res.locals;
-  //middleware
   const {
     employeeId,
     type,
   }: { employeeId: number; type: cardRepository.TransactionTypes } = req.body;
-  if (!employeeId || !type) {
-    return res.sendStatus(422);
-  }
-  console.log(apiKey);
-  //
+
   try {
     const card = await cardCreationServices(employeeId, type, apiKey);
     res.status(201).send({
@@ -39,9 +34,6 @@ export async function activateCard(req: Request, res: Response) {
     cardholderName: string;
     expirationDate: string;
   } = req.body;
-  if (!securityCode || !password || !number || !cardholderName || !expirationDate) {
-    return res.sendStatus(422);
-  }
 
   try {
     const activatedCard = await cardActivationServices(
