@@ -1,9 +1,9 @@
-import { Router } from 'express';
-import { createCard, listCards } from '../controllers/cardsControllers'
+import { Router } from "express";
+import { createCard } from "../controllers/cardsControllers";
+import keyMiddleware from "../middlewares/keyMiddleware"
 
 const cardsRouter = Router();
 
-cardsRouter.get("/cards", listCards);
-cardsRouter.post("/cards", createCard);
+cardsRouter.post("/cards", keyMiddleware, createCard);
 
 export default cardsRouter;

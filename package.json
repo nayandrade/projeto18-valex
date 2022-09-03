@@ -11,7 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/cryptr": "^4.0.1",
     "cors": "^2.8.5",
+    "cryptr": "^6.0.3",
     "dayjs": "^1.11.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
