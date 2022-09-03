@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import * as cardRepository from "../repositories/cardRepository";
 import * as employeeRepository from "../repositories/employeeRepository";
 import * as companyRepository from "../repositories/companyRepository";
+import validateCompany from "../utils/validateCompany";
 import { faker } from "@faker-js/faker";
 import dayjs from "dayjs";
 import Cryptr from "cryptr";
@@ -42,16 +43,16 @@ export default async function cardCreationServices(
   }
 }
 
-async function validateCompany(apiKey: string) {
-  try {
-    const company = await companyRepository.findByApiKey(apiKey);
-    if (company.id) {
-      return true;
-    }
-  } catch (error) {
-    throw "Company not found";
-  }
-}
+// async function validateCompany(apiKey: string) {
+//   try {
+//     const company = await companyRepository.findByApiKey(apiKey);
+//     if (company.id) {
+//       return true;
+//     }
+//   } catch (error) {
+//     throw "Company not found";
+//   }
+// }
 
 async function getUserCardType(
   type: cardRepository.TransactionTypes,

@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import * as cardRepository from "../repositories/cardRepository";
 import * as employeeRepository from "../repositories/employeeRepository";
 import * as companyRepository from "../repositories/companyRepository";
+import validateExpiration from "../utils/validateExpiration"
 import { faker } from "@faker-js/faker";
 import dayjs from "dayjs";
 import Cryptr from "cryptr";
@@ -63,18 +64,18 @@ async function validateCard(dbSecurityCode: string, securityCode: string) {
   throw "Card information is invalid";
 }
 
-async function validateExpiration(expirationDate: string) {
-  const today = dayjs(new Date()).format("MM/YY").toString();
-  const todayArray = today.split("/");
-  const expirationDateArray = expirationDate.split("/");
-  if (parseInt(todayArray[1]) < parseInt(expirationDateArray[1])) {
-    return false;
-  }
-  if (
-    parseInt(todayArray[0]) < parseInt(expirationDateArray[0]) &&
-    parseInt(todayArray[1]) === parseInt(expirationDateArray[1])
-  ) {
-    return false;
-  }
-  return true;
-}
+// async function validateExpiration(expirationDate: string) {
+//   const today = dayjs(new Date()).format("MM/YY").toString();
+//   const todayArray = today.split("/");
+//   const expirationDateArray = expirationDate.split("/");
+//   if (parseInt(todayArray[1]) < parseInt(expirationDateArray[1])) {
+//     return false;
+//   }
+//   if (
+//     parseInt(todayArray[0]) < parseInt(expirationDateArray[0]) &&
+//     parseInt(todayArray[1]) === parseInt(expirationDateArray[1])
+//   ) {
+//     return false;
+//   }
+//   return true;
+// }
