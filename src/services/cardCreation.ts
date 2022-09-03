@@ -90,7 +90,7 @@ function handleEmployeeName({ fullName }: { fullName: string }) {
     }
   }
   const sanitizedName = sanitizedArray.join(" ");
-  return sanitizedName;
+  return sanitizedName.toUpperCase();
 }
 
 function handleExpirationDate() {
