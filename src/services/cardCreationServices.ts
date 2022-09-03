@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 import * as cardRepository from "../repositories/cardRepository";
 import * as employeeRepository from "../repositories/employeeRepository";
-import * as companyRepository from "../repositories/companyRepository";
 import validateCompany from "../utils/validateCompany";
 import { faker } from "@faker-js/faker";
 import dayjs from "dayjs";

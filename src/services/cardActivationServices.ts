@@ -1,10 +1,6 @@
 import dotenv from "dotenv";
 import * as cardRepository from "../repositories/cardRepository";
-import * as employeeRepository from "../repositories/employeeRepository";
-import * as companyRepository from "../repositories/companyRepository";
 import validateExpiration from "../utils/validateExpiration"
-import { faker } from "@faker-js/faker";
-import dayjs from "dayjs";
 import Cryptr from "cryptr";
 
 dotenv.config();
