@@ -22,7 +22,7 @@ export default async function cardActivationServices(
     console.log(card);
     const isValid = await validateCard(card.securityCode, securityCode);
     const isExpired = await validateExpiration(card.expirationDate);
-    if (card.isBlocked && isValid && !isExpired) {
+    if (card.isBlocked && isValid && !isExpired ) { // && card.password === null
       const cryptr = new Cryptr(`${KEY}`);
       const encriptedPassword = cryptr.encrypt(password);
       const updateCard = await cardRepository.update(card.id, {
