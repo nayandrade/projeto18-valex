@@ -9,7 +9,7 @@ import Cryptr from "cryptr";
 dotenv.config();
 const KEY = process.env.CCV_KEY;
 
-export async function createCard(
+export default async function cardCreationServices(
   employeeId: number,
   type: cardRepository.TransactionTypes,
   apiKey: string
@@ -95,7 +95,7 @@ function handleEmployeeName({ fullName }: { fullName: string }) {
 
 function handleExpirationDate() {
   const today = new Date();
-  const expiration = dayjs(today).add(5, "year").format("MM-YY").toString();
+  const expiration = dayjs(today).add(5, "year").format("MM/YY").toString();
   return expiration;
 }
 
