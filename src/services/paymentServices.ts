@@ -5,6 +5,7 @@ import * as cardRepository from "../repositories/cardRepository";
 import * as businessRepository from "../repositories/businessRepository";
 import * as rechargeRepository from "../repositories/rechargeRepository";
 import validateExpiration from "../utils/validateExpiration";
+import validatePassword from "../utils/validatePassword"
 
 dotenv.config();
 const KEY = process.env.CCV_KEY;
@@ -49,14 +50,14 @@ export default async function paymentServices(
   }
 }
 
-function validatePassword(password: string, dbPassword: string) {
-  const cryptr = new Cryptr(`${KEY}`);
-  const decryptedPassword = cryptr.decrypt(dbPassword);
-  if (decryptedPassword !== password) {
-    return false;
-  }
-  return true;
-}
+// function validatePassword(password: string, dbPassword: string) {
+//   const cryptr = new Cryptr(`${KEY}`);
+//   const decryptedPassword = cryptr.decrypt(dbPassword);
+//   if (decryptedPassword !== password) {
+//     return false;
+//   }
+//   return true;
+// }
 
 async function validateBusiness(businessId: number, type: string) {
   const business = await businessRepository.findById(businessId);

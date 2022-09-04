@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import * as cardRepository from "../repositories/cardRepository";
 import validateExpiration from "../utils/validateExpiration"
+import validateCard from "../utils/validateCard";
 import Cryptr from "cryptr";
 
 dotenv.config();
@@ -47,29 +48,3 @@ async function checkCard(
     throw "Card not found";
   }
 }
-
-async function validateCard(dbSecurityCode: string, securityCode: string) {
-  const cryptr = new Cryptr(`${KEY}`);
-  const decryptedString = cryptr.decrypt(dbSecurityCode);
-  if (decryptedString === securityCode) {
-
-    return true;
-  }
-  throw "Card information is invalid";
-}
-
-// async function validateExpiration(expirationDate: string) {
-//   const today = dayjs(new Date()).format("MM/YY").toString();
-//   const todayArray = today.split("/");
-//   const expirationDateArray = expirationDate.split("/");
-//   if (parseInt(todayArray[1]) < parseInt(expirationDateArray[1])) {
-//     return false;
-//   }
-//   if (
-//     parseInt(todayArray[0]) < parseInt(expirationDateArray[0]) &&
-//     parseInt(todayArray[1]) === parseInt(expirationDateArray[1])
-//   ) {
-//     return false;
-//   }
-//   return true;
-// }
