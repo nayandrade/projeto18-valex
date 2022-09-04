@@ -12,7 +12,6 @@ export async function postPayment(req: Request, res: Response) {
     await paymentServices(cardId, businessId, amount, password);
     res.sendStatus(201)
   } catch (error) {
-    console.log(error);
     res.status(500).send(error);
   }
 }

@@ -52,12 +52,6 @@ export default async function paymentServices(
 function validatePassword(password: string, dbPassword: string) {
   const cryptr = new Cryptr(`${KEY}`);
   const decryptedPassword = cryptr.decrypt(dbPassword);
-  console.log(
-    decryptedPassword,
-    password,
-    typeof decryptedPassword,
-    typeof password
-  );
   if (decryptedPassword !== password) {
     return false;
   }

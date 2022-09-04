@@ -12,7 +12,6 @@ export default async function rechargeServices(
     const isValidCompany = await validateCompany(apiKey);
     const isValidCard = await cardRepository.findById(id);
     const isExpired = await validateExpiration(isValidCard?.expirationDate);
-    //console.log(typeof isValidCard, typeof isValidCompany, isValidCard);
     if (isValidCompany && isValidCard && !isValidCard.isBlocked && amount > 0 && !isExpired) {
       const cardRecharge = await rechargeRepository.insert({
         cardId: id,

@@ -8,7 +8,6 @@ export async function cardRecharge(req: Request, res: Response) {
     const rechargeData = await rechargeServices(id, amount, apiKey);
     res.status(200).send(rechargeData);
   } catch (error) {
-    console.log(error);
     res.status(500).send(error);
   }
 }

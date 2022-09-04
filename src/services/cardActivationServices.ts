@@ -15,7 +15,6 @@ export default async function cardActivationServices(
 ) {
   try {
     const card = await checkCard(number, cardholderName, expirationDate);
-    console.log(card);
     const isValid = await validateCard(card.securityCode, securityCode);
     const isExpired = await validateExpiration(card.expirationDate);
     if (card.isBlocked && isValid && !isExpired ) { // && card.password === null
@@ -52,9 +51,8 @@ async function checkCard(
 async function validateCard(dbSecurityCode: string, securityCode: string) {
   const cryptr = new Cryptr(`${KEY}`);
   const decryptedString = cryptr.decrypt(dbSecurityCode);
-  console.log(decryptedString);
   if (decryptedString === securityCode) {
-    console.log("deu match");
+
     return true;
   }
   throw "Card information is invalid";
