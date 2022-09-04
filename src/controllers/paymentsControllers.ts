@@ -6,10 +6,11 @@ export async function postPayment(req: Request, res: Response) {
     cardId,
     businessId,
     amount,
-  }: { cardId: number; businessId: number; amount: number } = req.body;
+    password
+  }: { cardId: number; businessId: number; amount: number, password: string } = req.body;
   try {
-    const paymentData = await paymentServices(cardId, businessId, amount);
-    res.status(200).send(paymentData);
+    await paymentServices(cardId, businessId, amount, password);
+    res.sendStatus(201)
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
