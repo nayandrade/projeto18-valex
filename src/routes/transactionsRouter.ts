@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { getTransactionsData } from "../controllers/transactionsControllers";
+import { getDetaildBalance } from "../controllers/transactionsControllers";
 
 const transactionsRouter = Router();
 
-transactionsRouter.get("/transactions/:id", getTransactionsData);
+transactionsRouter.get("/transactions/:id", getDetaildBalance);
 
 export default transactionsRouter;

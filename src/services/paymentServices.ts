@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import * as paymentRepository from "../repositories/paymentRepository";
 import * as cardRepository from "../repositories/cardRepository";
 import * as businessRepository from "../repositories/businessRepository";
-import * as rechargesRepository from "../repositories/rechargeRepository";
+import * as rechargeRepository from "../repositories/rechargeRepository";
 import validateExpiration from "../utils/validateExpiration";
 
 dotenv.config();
@@ -78,7 +78,7 @@ async function validateBalance(cardId: number, purchaseAmount: number) {
       const amount = e.amount;
       debt += amount;
     });
-    const creditData = await rechargesRepository.findByCardId(cardId);
+    const creditData = await rechargeRepository.findByCardId(cardId);
     creditData?.map((e) => {
       const amount = e.amount
       credit += amount
