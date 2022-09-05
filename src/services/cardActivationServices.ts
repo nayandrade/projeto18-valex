@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import * as cardRepository from "../repositories/cardRepository";
-import validateExpiration from "../utils/validateExpiration"
+import validateExpiration from "../utils/validateExpiration";
 import validateCard from "../utils/validateCard";
 import Cryptr from "cryptr";
 
@@ -18,15 +18,16 @@ export default async function cardActivationServices(
     const card = await checkCard(number, cardholderName, expirationDate);
     const isValid = await validateCard(card.securityCode, securityCode);
     const isExpired = await validateExpiration(card.expirationDate);
-    if (card.isBlocked && isValid && !isExpired ) { // && card.password === null
+    if (card.isBlocked && isValid && !isExpired && !card.password) {
       const cryptr = new Cryptr(`${KEY}`);
       const encriptedPassword = cryptr.encrypt(password);
       const updateCard = await cardRepository.update(card.id, {
         password: encriptedPassword,
         isBlocked: false,
       });
-      return 'atualizou'
+      return;
     }
+    throw "Card error";
   } catch (error) {
     throw `${error}`;
   }
