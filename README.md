@@ -65,7 +65,7 @@ O Body da requisição deve ser feito no seguinte formato:
 }
 ```
 
-# Rotas de recarga:
+# Rotas de recarga e pagamento:
 
 ## Rota <span style="color:yellow"> **POST** </span>/recharges
 
